@@ -2,6 +2,8 @@
 
 Tiny Go file server. One static binary on gokrazy, Docker/Podman (Krazy Kontainer), and Kubernetes.
 
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-yellow?logo=buymeacoffee&logoColor=white)](https://buymeacoffee.com/grantgollak)
+
 Hyper-minimal: pure `net/http`, no CGO, no frameworks, no in-process auth/uploads/WebDAV/UI. Put Tailscale, Caddy, or an Ingress in front when you need access control.
 
 **Module:** `github.com/crimsonflower420/KrazyToGo`  
