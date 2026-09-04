@@ -1,0 +1,28 @@
+# Example reverse proxy in front of KrazyToGo / Krazy Kontainer.
+# Put TLS and (optional) auth here — keep auth OUT of the file-server binary.
+#
+# Local smoke:
+#   caddy run --config examples/Caddyfile
+#
+# Replace hostnames and upstream as needed. Placeholders only — no secrets.
+
+{
+	# email you@example.com
+}
+
+files.example.com {
+	# Optional basic auth (Caddy):
+	# basicauth {
+	# 	alice $2a$14$PLACEHOLDER_BCRYPT_HASH
+	# }
+
+	reverse_proxy 127.0.0.1:8080
+
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer
+		-Server
+	}
+
+	encode gzip zstd
+}

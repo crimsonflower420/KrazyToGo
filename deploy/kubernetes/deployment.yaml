@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: krazytogo
+  namespace: krazytogo
+  labels:
+    app: krazytogo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: krazytogo
+  template:
+    metadata:
+      labels:
+        app: krazytogo
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: krazytogo
+          image: krazytogo:local # replace with your registry image
+          imagePullPolicy: IfNotPresent
+          args: []
+          env:
+            - name: KRAZY_ROOT
+              value: /data
+            - name: KRAZY_ADDR
+              value: ":8080"
+            - name: KRAZY_BROWSE
+              value: "true"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
+            capabilities:
+              drop:
+                - ALL
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 500m
+              memory: 128Mi
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: krazytogo-data

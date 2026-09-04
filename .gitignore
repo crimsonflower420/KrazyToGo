@@ -1,0 +1,39 @@
+# Binaries
+/krazytogo
+/cmd/krazytogo/krazytogo
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go workspace
+go.work
+go.work.sum
+
+# Coverage / profiling
+*.coverprofile
+coverage.out
+coverage.html
+*.prof
+cpu.out
+mem.out
+
+# Local data / runtime
+/data/
+!/data/.gitkeep
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+/dist/
+/bin/

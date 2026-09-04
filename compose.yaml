@@ -1,0 +1,21 @@
+# Docker Compose / Podman Compose for Krazy Kontainer.
+# Podman: prefer rootless; use :Z on volumes for SELinux (Fedora/RHEL).
+services:
+  krazytogo:
+    build: .
+    image: krazytogo:local
+    ports:
+      - "8080:8080"
+    environment:
+      KRAZY_ROOT: /data
+      KRAZY_ADDR: ":8080"
+      KRAZY_BROWSE: "true"
+    volumes:
+      # :Z is ignored by Docker on non-SELinux hosts; required for rootless Podman+SELinux.
+      - ./data:/data:Z
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    restart: unless-stopped
