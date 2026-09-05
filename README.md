@@ -27,11 +27,21 @@ Most “simple” file servers grow a web UI, upload forms, and half an identity
 
 ## Quick start
 
+Install the binary:
+
+```bash
+go install github.com/crimsonflower420/KrazyToGo/cmd/krazytogo@latest
+mkdir -p data && echo hello > data/hello.txt
+krazytogo -root ./data -addr :8080
+# → http://127.0.0.1:8080/hello.txt
+# → http://127.0.0.1:8080/healthz  → 200 ok
+```
+
+From a checkout (no install):
+
 ```bash
 mkdir -p data && echo hello > data/hello.txt
 go run ./cmd/krazytogo -root ./data -addr :8080
-# → http://127.0.0.1:8080/hello.txt
-# → http://127.0.0.1:8080/healthz  → 200 ok
 ```
 
 Static build:
