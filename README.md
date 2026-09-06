@@ -13,6 +13,7 @@ Hyper-minimal by design: pure `net/http`, no CGO, no frameworks, and **no** in-p
 |---|---|
 | **Module** | `github.com/crimsonflower420/KrazyToGo` |
 | **Package** | `cmd/krazytogo` |
+| **Footprint** | ~5.4 MiB stripped static binary (`CGO_ENABLED=0`, `-ldflags=-s -w`, linux/amd64); stdlib only |
 | **License** | GPL-3.0 (see [`LICENSE`](LICENSE)) |
 | **Support** | [Buy Me a Coffee](https://buymeacoffee.com/grantgollak) · GitHub Sponsor button |
 
